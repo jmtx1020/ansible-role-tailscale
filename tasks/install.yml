@@ -133,11 +133,11 @@
   become: true
   ansible.builtin.command: "tailscale up {{ tailscale_args_string | trim }} --authkey={{ tailscale_authkey_string | trim }}"
   # Since the auth key is included in this task's output, we do not want to log output
-  no_log: "{{ not (insecurely_log_authkey | bool) }}"
+  no_log: false #"{{ not (insecurely_log_authkey | bool) }}"
   changed_when: true
   register: tailscale_start
   # If a failure occurred due to state changes, we still want to log a redacted version of the error if "no_log" is true
-  ignore_errors: true
+  ignore_errors: false
   when:
     - not tailscale_up_skip
     - state_file is changed or not tailscale_is_online
