@@ -149,6 +149,8 @@
   notify: Confirm Tailscale is Connected
   async: "{{ (tailscale_up_timeout | trim | int) + 10 }}"
   poll: 5
+  retries: 5
+  delay: 10
 
 - name: Install | Report non-sensitive stdout from "tailscale up"  # noqa: no-handler
   ansible.builtin.debug:
