@@ -126,7 +126,7 @@
     dest: "{{ tailscale_state_folder }}/artis3n-tailscale/state"
     owner: "{{ ansible_user_uid }}"
     group: "{{ ansible_user_gid }}"
-    mode: '0644'
+    mode: '0755'
   register: state_file
   
 - name: Show Command
