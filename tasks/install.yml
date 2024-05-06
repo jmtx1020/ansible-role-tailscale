@@ -128,6 +128,11 @@
     group: "{{ ansible_user_gid }}"
     mode: '0644'
   register: state_file
+  
+- name: Show Command
+  ansible.builtin.debug:
+    msg: |-
+      tailscale up {{ tailscale_args_string | trim }} --authkey={{ tailscale_authkey_string | trim }}
 
 - name: Install | Bring Tailscale Up (JOSE)
   become: true
