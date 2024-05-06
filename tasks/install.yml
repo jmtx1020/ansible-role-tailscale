@@ -129,7 +129,7 @@
     mode: '0644'
   register: state_file
 
-- name: Install | Bring Tailscale Up
+- name: Install | Bring Tailscale Up (JOSE)
   become: true
   ansible.builtin.command: "tailscale up {{ tailscale_args_string | trim }} --authkey={{ tailscale_authkey_string | trim }}"
   # Since the auth key is included in this task's output, we do not want to log output
