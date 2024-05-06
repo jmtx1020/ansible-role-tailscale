@@ -39,7 +39,7 @@
     state: directory
     owner: "{{ ansible_user_uid }}"
     group: "{{ ansible_user_gid }}"
-    mode: '0700'
+    mode: '0755'
   loop:
     - "{{ tailscale_state_folder }}"
     - "{{ tailscale_state_folder }}/artis3n-tailscale"
@@ -126,7 +126,7 @@
     dest: "{{ tailscale_state_folder }}/artis3n-tailscale/state"
     owner: "{{ ansible_user_uid }}"
     group: "{{ ansible_user_gid }}"
-    mode: '0644'
+    mode: '0755'
   register: state_file
   
 - name: Show Command
@@ -149,6 +149,8 @@
   notify: Confirm Tailscale is Connected
   async: "{{ (tailscale_up_timeout | trim | int) + 10 }}"
   poll: 5
+  retries: 5
+  delay: 10
 
 - name: Install | Report non-sensitive stdout from "tailscale up"  # noqa: no-handler
   ansible.builtin.debug:
